@@ -1,1 +1,787 @@
 
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="theme-color" content="#7c3aed"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="TaskFlow"/>
+<title>TaskFlow — Λίστα Εργασιών</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style type="text/css">@font-face {font-family:Inter;font-style:normal;font-weight:300;src:url(/cf-fonts/v/inter/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:300;src:url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:300;src:url(/cf-fonts/v/inter/5.2.8/greek/wght/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:300;src:url(/cf-fonts/v/inter/5.2.8/greek-ext/wght/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:300;src:url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:300;src:url(/cf-fonts/v/inter/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:300;src:url(/cf-fonts/v/inter/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/greek-ext/wght/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/greek/wght/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/greek-ext/wght/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/greek/wght/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/greek/wght/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/greek-ext/wght/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/greek-ext/wght/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/greek/wght/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:800;src:url(/cf-fonts/v/inter/5.2.8/greek-ext/wght/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:800;src:url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:800;src:url(/cf-fonts/v/inter/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:800;src:url(/cf-fonts/v/inter/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:800;src:url(/cf-fonts/v/inter/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:800;src:url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:800;src:url(/cf-fonts/v/inter/5.2.8/greek/wght/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}</style>
+<style>
+:root {
+  --bg1:#1a0533;--bg2:#2d1065;--bg3:#0d1b4b;
+  --glass:rgba(255,255,255,0.10);--glass2:rgba(255,255,255,0.18);
+  --border:rgba(255,255,255,0.18);--border2:rgba(255,255,255,0.30);
+  --text:#ffffff;--text2:#c4b5fd;--text3:#a78bfa;
+  --card:rgba(255,255,255,0.08);
+  --high:#ff4d6d;--med:#ffb703;--low:#06d6a0;
+  --accent:#a855f7;--accent2:#ec4899;
+  --radius:18px;--radius2:14px;--radius3:10px;
+  --shadow:0 8px 32px rgba(0,0,0,0.4);
+  --shadow2:0 4px 16px rgba(0,0,0,0.25);
+  --transition:all 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+.light {
+  --bg1:#f0f4ff;--bg2:#e0e7ff;--bg3:#fdf2ff;
+  --glass:rgba(255,255,255,0.75);--glass2:rgba(255,255,255,0.95);
+  --border:rgba(120,80,220,0.15);--border2:rgba(120,80,220,0.30);
+  --text:#1e1b4b;--text2:#4c1d95;--text3:#7c3aed;
+  --card:rgba(255,255,255,0.85);
+  --shadow:0 8px 32px rgba(120,80,220,0.15);
+  --shadow2:0 4px 16px rgba(120,80,220,0.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 50%,var(--bg3) 100%);min-height:100vh;color:var(--text);transition:background 0.4s;overflow-x:hidden}
+.light body,body.light{background:linear-gradient(135deg,#c7d2fe 0%,#e0e7ff 40%,#fce7f3 100%)}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
+
+/* LAYOUT */
+.app{max-width:1100px;margin:0 auto;padding:20px 14px 130px}
+
+/* HEADER */
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;padding:18px 22px;background:var(--glass);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-icon{width:46px;height:46px;background:linear-gradient(135deg,#a855f7,#ec4899);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 18px rgba(168,85,247,0.5);flex-shrink:0}
+.logo-text h1{font-size:20px;font-weight:800;background:linear-gradient(135deg,#e879f9,#a855f7,#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.logo-text p{font-size:11px;color:var(--text2);font-weight:500;margin-top:2px}
+.header-actions{display:flex;gap:8px;align-items:center}
+.icon-btn{width:42px;height:42px;border-radius:12px;border:1px solid var(--border);background:var(--glass);color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:var(--transition);backdrop-filter:blur(10px)}
+.icon-btn:hover{background:var(--glass2);border-color:var(--border2);transform:translateY(-2px);box-shadow:0 4px 16px rgba(168,85,247,0.3)}
+.install-btn{display:none;padding:0 14px;width:auto;font-size:12px;font-weight:700;gap:6px;white-space:nowrap;background:linear-gradient(135deg,#a855f7,#ec4899);border-color:transparent;color:white}
+.install-btn.visible{display:flex}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
+@media(max-width:580px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat-card{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:var(--radius);padding:18px 12px;text-align:center;transition:var(--transition);position:relative;overflow:hidden}
+.stat-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--border2)}
+.stat-icon{font-size:26px;margin-bottom:8px}
+.stat-val{font-size:34px;font-weight:800;line-height:1;letter-spacing:-1px}
+.stat-lbl{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:0.5px;margin-top:5px;font-weight:600}
+.stat-card.total .stat-val{background:linear-gradient(135deg,#e879f9,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-card.done .stat-val{background:linear-gradient(135deg,#06d6a0,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-card.pend .stat-val{background:linear-gradient(135deg,#ffb703,#fb8500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-card.perc .stat-val{background:linear-gradient(135deg,#38bdf8,#0ea5e9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* PROGRESS */
+.progress-wrap{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:var(--radius);padding:18px 22px;margin-bottom:22px}
+.progress-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.progress-head span{font-size:13px;font-weight:600;color:var(--text2)}
+.progress-head strong{font-size:14px;font-weight:800;color:#e879f9}
+.progress-bar-bg{height:12px;background:rgba(255,255,255,0.1);border-radius:99px;overflow:hidden}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,#a855f7,#ec4899,#38bdf8);border-radius:99px;transition:width 0.6s cubic-bezier(0.4,0,0.2,1);position:relative}
+.progress-bar-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);animation:shimmer 2s infinite}
+@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+
+/* TOOLBAR */
+.toolbar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.search-wrap{flex:1;min-width:180px;position:relative}
+.search-wrap i{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:14px}
+.search-input{width:100%;padding:11px 13px 11px 38px;background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:var(--radius3);color:var(--text);font-size:13px;font-family:inherit;outline:none;transition:var(--transition)}
+.search-input::placeholder{color:var(--text3)}
+.search-input:focus{border-color:#a855f7;box-shadow:0 0 0 3px rgba(168,85,247,0.2)}
+.filter-select{padding:11px 13px;background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:var(--radius3);color:var(--text);font-size:13px;font-family:inherit;outline:none;cursor:pointer;transition:var(--transition);min-width:130px}
+.filter-select:focus{border-color:#a855f7}
+.filter-select option{background:#2d1065;color:#fff}
+.light .filter-select option{background:#e0e7ff;color:#1e1b4b}
+
+/* TABS */
+.tabs{display:flex;gap:4px;margin-bottom:18px;background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:var(--radius2);padding:5px}
+.tab{flex:1;padding:9px 4px;border:none;background:transparent;color:var(--text2);font-size:12px;font-weight:700;border-radius:10px;cursor:pointer;transition:var(--transition);font-family:inherit;text-align:center}
+.tab:hover{color:var(--text);background:var(--glass)}
+.tab.active{background:linear-gradient(135deg,#a855f7,#ec4899);color:white;box-shadow:0 4px 14px rgba(168,85,247,0.4)}
+
+/* SECTION HEADER */
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.section-title{font-size:16px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:8px}
+.task-count-badge{background:linear-gradient(135deg,#a855f7,#ec4899);color:white;font-size:11px;font-weight:700;padding:3px 12px;border-radius:99px;box-shadow:0 2px 10px rgba(168,85,247,0.3)}
+
+/* TASK LIST */
+.task-list{display:flex;flex-direction:column;gap:8px}
+.task-item{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:var(--radius2);padding:14px 16px;display:flex;align-items:flex-start;gap:11px;transition:var(--transition);cursor:grab;position:relative;overflow:hidden;animation:slideIn 0.3s ease}
+@keyframes slideIn{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+.task-item:hover{background:var(--glass2);border-color:var(--border2);transform:translateX(3px);box-shadow:var(--shadow2)}
+.task-item:active{cursor:grabbing}
+.task-item.dragging{opacity:0.45;cursor:grabbing}
+.task-item.drag-over{border-color:#a855f7;background:rgba(168,85,247,0.12)}
+.task-item.done-item{opacity:0.55}
+.task-item.done-item .task-title{text-decoration:line-through;color:var(--text3)}
+.task-priority-bar{position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:14px 0 0 14px}
+.task-priority-bar.high{background:linear-gradient(180deg,#ff4d6d,#ff6b6b)}
+.task-priority-bar.medium{background:linear-gradient(180deg,#ffb703,#ffd60a)}
+.task-priority-bar.low{background:linear-gradient(180deg,#06d6a0,#34d399)}
+.task-check{width:24px;height:24px;border-radius:50%;border:2px solid var(--border2);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--transition);flex-shrink:0;margin-top:1px}
+.task-check:hover{border-color:#a855f7;background:rgba(168,85,247,0.15)}
+.task-check.checked{background:linear-gradient(135deg,#06d6a0,#38bdf8);border-color:#06d6a0;box-shadow:0 2px 10px rgba(6,214,160,0.4)}
+.task-check.checked::after{content:'✓';color:white;font-size:13px;font-weight:800}
+.task-body{flex:1;min-width:0}
+.task-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:7px;word-break:break-word;line-height:1.4}
+.task-meta{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:99px;font-size:10px;font-weight:700;letter-spacing:0.2px}
+.badge-cat-work{background:rgba(99,102,241,0.25);color:#a5b4fc}
+.badge-cat-personal{background:rgba(236,72,153,0.25);color:#f9a8d4}
+.badge-cat-fitness{background:rgba(245,158,11,0.25);color:#fcd34d}
+.badge-cat-shopping{background:rgba(6,214,160,0.25);color:#6ee7b7}
+.badge-cat-other{background:rgba(168,85,247,0.25);color:#d8b4fe}
+.badge-high{background:rgba(255,77,109,0.25);color:#ff4d6d}
+.badge-medium{background:rgba(255,183,3,0.25);color:#ffb703}
+.badge-low{background:rgba(6,214,160,0.25);color:#06d6a0}
+.badge-date{background:rgba(56,189,248,0.2);color:#7dd3fc}
+.badge-overdue{background:rgba(255,77,109,0.25);color:#ff4d6d;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.55}}
+.task-actions{display:flex;gap:4px;flex-shrink:0}
+.task-btn{width:32px;height:32px;border-radius:9px;border:none;background:transparent;color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:var(--transition)}
+.task-btn:hover{background:var(--glass2)}
+.task-btn.edit:hover{color:#a855f7;background:rgba(168,85,247,0.15)}
+.task-btn.del:hover{color:#ff4d6d;background:rgba(255,77,109,0.15)}
+.task-desc{font-size:12px;color:var(--text2);margin-top:6px;line-height:1.5;opacity:0.8}
+
+/* EMPTY */
+.empty{text-align:center;padding:56px 20px}
+.empty-icon{font-size:68px;margin-bottom:16px;opacity:0.5}
+.empty h3{font-size:18px;font-weight:800;color:var(--text2);margin-bottom:8px}
+.empty p{font-size:13px;color:var(--text3)}
+
+/* FAB */
+.fab{position:fixed;bottom:30px;right:24px;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#ec4899);border:none;color:white;font-size:26px;cursor:pointer;box-shadow:0 8px 28px rgba(168,85,247,0.6);transition:var(--transition);display:flex;align-items:center;justify-content:center;z-index:100}
+.fab:hover{transform:scale(1.12) rotate(45deg);box-shadow:0 12px 36px rgba(168,85,247,0.7)}
+.fab:active{transform:scale(0.95) rotate(45deg)}
+@media(max-width:480px){.fab{bottom:20px;right:16px;width:54px;height:54px;font-size:22px}}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:200;display:flex;align-items:flex-end;justify-content:center;padding:0;opacity:0;pointer-events:none;transition:opacity 0.25s}
+@media(min-width:600px){.modal-bg{align-items:center;padding:16px}}
+.modal-bg.show{opacity:1;pointer-events:all}
+.modal{background:linear-gradient(160deg,rgba(45,16,101,0.98),rgba(13,27,75,0.98));border:1px solid var(--border2);border-radius:24px 24px 0 0;padding:28px 22px 34px;width:100%;max-width:520px;max-height:92vh;overflow-y:auto;transform:translateY(60px);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);box-shadow:0 -8px 48px rgba(0,0,0,0.5)}
+@media(min-width:600px){.modal{border-radius:24px;transform:scale(0.92) translateY(20px)}}
+.light .modal{background:linear-gradient(160deg,rgba(240,244,255,0.99),rgba(253,242,255,0.99));border-color:rgba(168,85,247,0.25)}
+.modal-bg.show .modal{transform:translateY(0)}
+@media(min-width:600px){.modal-bg.show .modal{transform:scale(1) translateY(0)}}
+.modal-drag{width:40px;height:4px;background:var(--border2);border-radius:99px;margin:0 auto 20px;display:block}
+@media(min-width:600px){.modal-drag{display:none}}
+.modal h2{font-size:19px;font-weight:800;margin-bottom:20px;background:linear-gradient(135deg,#e879f9,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.form-row{margin-bottom:14px}
+.form-row label{display:block;font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px}
+.form-row input,.form-row select,.form-row textarea{width:100%;padding:12px 14px;background:rgba(255,255,255,0.08);border:1px solid var(--border);border-radius:var(--radius3);color:var(--text);font-size:14px;font-family:inherit;outline:none;transition:var(--transition)}
+.light .form-row input,.light .form-row select,.light .form-row textarea{background:rgba(168,85,247,0.06);color:#1e1b4b;border-color:rgba(168,85,247,0.2)}
+.form-row input:focus,.form-row select:focus,.form-row textarea:focus{border-color:#a855f7;box-shadow:0 0 0 3px rgba(168,85,247,0.2)}
+.form-row textarea{resize:vertical;min-height:72px;line-height:1.55}
+.form-row select option{background:#2d1065;color:#fff}
+.light .form-row select option{background:#e0e7ff;color:#1e1b4b}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:380px){.form-grid{grid-template-columns:1fr}}
+.modal-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:20px;flex-wrap:wrap}
+.btn-save{padding:13px 26px;background:linear-gradient(135deg,#a855f7,#ec4899);color:white;border:none;border-radius:var(--radius3);font-size:14px;font-weight:700;cursor:pointer;transition:var(--transition);font-family:inherit;box-shadow:0 4px 16px rgba(168,85,247,0.35)}
+.btn-save:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(168,85,247,0.5)}
+.btn-cancel{padding:13px 20px;background:transparent;color:var(--text2);border:1px solid var(--border);border-radius:var(--radius3);font-size:14px;font-weight:600;cursor:pointer;transition:var(--transition);font-family:inherit}
+.btn-cancel:hover{background:var(--glass);color:var(--text)}
+
+/* POMODORO */
+.pomo-wrap{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:var(--radius);padding:18px 22px;margin-bottom:22px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.pomo-circle{width:86px;height:86px;flex-shrink:0}
+.pomo-circle svg{transform:rotate(-90deg)}
+.pomo-circle .bg{fill:none;stroke:rgba(255,255,255,0.1);stroke-width:7}
+.pomo-circle .fg{fill:none;stroke:url(#pomoGrad);stroke-width:7;stroke-linecap:round;transition:stroke-dashoffset 1s linear}
+.pomo-info{flex:1;min-width:160px}
+.pomo-label{font-size:11px;color:var(--text2);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+.pomo-time{font-size:30px;font-weight:800;color:var(--text);letter-spacing:-1.5px;line-height:1}
+.pomo-sessions{display:flex;gap:5px;margin-top:8px}
+.pomo-dot{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,0.15);transition:var(--transition)}
+.pomo-dot.done{background:linear-gradient(135deg,#06d6a0,#38bdf8);box-shadow:0 0 8px rgba(6,214,160,0.5)}
+.pomo-btns{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.pomo-btn{padding:7px 13px;border-radius:9px;border:1px solid var(--border);background:var(--glass);color:var(--text);font-size:12px;font-weight:600;cursor:pointer;transition:var(--transition);font-family:inherit}
+.pomo-btn:hover{background:var(--glass2);border-color:var(--border2)}
+.pomo-btn.active{background:linear-gradient(135deg,#ff4d6d,#ff6b6b);border-color:#ff4d6d;color:white;box-shadow:0 4px 14px rgba(255,77,109,0.4)}
+
+/* CHART */
+.chart-wrap{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:var(--radius);padding:18px 22px;margin-bottom:22px}
+.chart-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.chart-bars{display:flex;align-items:flex-end;gap:8px;height:100px}
+.chart-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.chart-bar{width:100%;border-radius:6px 6px 0 0;background:linear-gradient(180deg,#a855f7,#7c3aed);transition:height 0.6s cubic-bezier(0.4,0,0.2,1);min-height:4px}
+.chart-bar:hover{filter:brightness(1.25)}
+.chart-day{font-size:10px;color:var(--text2);font-weight:700}
+.chart-val{font-size:10px;color:var(--text3);font-weight:600;min-height:14px}
+
+/* CONFETTI */
+.confetti-piece{position:fixed;pointer-events:none;z-index:9999;animation:confettiFall linear forwards;border-radius:3px}
+@keyframes confettiFall{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
+
+/* TOAST */
+.toast-wrap{position:fixed;top:16px;right:16px;z-index:9000;display:flex;flex-direction:column;gap:8px;pointer-events:none;max-width:280px}
+@media(max-width:480px){.toast-wrap{top:auto;bottom:90px;left:16px;right:16px;max-width:none}}
+.toast{background:rgba(45,16,101,0.95);backdrop-filter:blur(20px);border:1px solid var(--border2);border-radius:14px;padding:12px 18px;font-size:13px;font-weight:600;color:#fff;box-shadow:var(--shadow);animation:toastIn 0.3s ease;pointer-events:all;line-height:1.4}
+.light .toast{background:rgba(255,255,255,0.96);color:#1e1b4b;border-color:rgba(168,85,247,0.3)}
+@keyframes toastIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+.toast.success{border-color:#06d6a0;box-shadow:0 4px 20px rgba(6,214,160,0.3)}
+.toast.error{border-color:#ff4d6d;box-shadow:0 4px 20px rgba(255,77,109,0.3)}
+
+/* INSTALL BANNER */
+.install-banner{background:linear-gradient(135deg,rgba(168,85,247,0.2),rgba(236,72,153,0.2));border:1px solid rgba(168,85,247,0.4);border-radius:var(--radius2);padding:14px 18px;margin-bottom:20px;display:none;align-items:center;gap:12px;flex-wrap:wrap}
+.install-banner.visible{display:flex}
+.install-banner p{flex:1;font-size:13px;font-weight:600;color:var(--text);min-width:180px}
+.install-banner button{padding:9px 18px;background:linear-gradient(135deg,#a855f7,#ec4899);color:white;border:none;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
+.install-banner .close-banner{background:transparent;border:none;color:var(--text3);cursor:pointer;font-size:16px;padding:4px;flex-shrink:0}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- INSTALL BANNER -->
+  <div class="install-banner" id="installBanner">
+    <span style="font-size:24px">📱</span>
+    <p>Εγκατάσταση στο κινητό σου για γρήγορη πρόσβαση!</p>
+    <button onclick="installApp()">Εγκατάσταση</button>
+    <button class="close-banner" onclick="document.getElementById('installBanner').classList.remove('visible')">✕</button>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon">✓</div>
+      <div class="logo-text">
+        <h1>TaskFlow</h1>
+        <p id="todayDate">Φόρτωση...</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" id="themeBtn" title="Εναλλαγή θέματος"><i class="fa fa-moon"></i></button>
+      <button class="icon-btn" onclick="exportCSV()" title="Εξαγωγή CSV"><i class="fa fa-download"></i></button>
+      <button class="icon-btn install-btn" id="installBtn" title="Εγκατάσταση"><i class="fa fa-mobile-screen"></i> Εγκ/ση</button>
+    </div>
+  </header>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat-card total">
+      <div class="stat-icon">📋</div>
+      <div class="stat-val" id="s-total">0</div>
+      <div class="stat-lbl">Σύνολο</div>
+    </div>
+    <div class="stat-card done">
+      <div class="stat-icon">✅</div>
+      <div class="stat-val" id="s-done">0</div>
+      <div class="stat-lbl">Ολοκλ/νες</div>
+    </div>
+    <div class="stat-card pend">
+      <div class="stat-icon">⏳</div>
+      <div class="stat-val" id="s-pend">0</div>
+      <div class="stat-lbl">Εκκρεμείς</div>
+    </div>
+    <div class="stat-card perc">
+      <div class="stat-icon">🎯</div>
+      <div class="stat-val" id="s-perc">0%</div>
+      <div class="stat-lbl">Επίτευξη</div>
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap">
+    <div class="progress-head">
+      <span>Συνολική Πρόοδος</span>
+      <strong id="prog-lbl">0%</strong>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="prog-bar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- POMODORO -->
+  <div class="pomo-wrap">
+    <div class="pomo-circle">
+      <svg viewBox="0 0 86 86" width="86" height="86">
+        <defs>
+          <linearGradient id="pomoGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#a855f7"/>
+            <stop offset="100%" stop-color="#ec4899"/>
+          </linearGradient>
+        </defs>
+        <circle class="bg" cx="43" cy="43" r="35"/>
+        <circle class="fg" id="pomoCircle" cx="43" cy="43" r="35" stroke-dasharray="220" stroke-dashoffset="0"/>
+      </svg>
+    </div>
+    <div class="pomo-info">
+      <div class="pomo-label" id="pomoLabel">🍅 Χρόνος Εστίασης</div>
+      <div class="pomo-time" id="pomoTime">25:00</div>
+      <div class="pomo-sessions" id="pomoDots"></div>
+      <div class="pomo-btns">
+        <button class="pomo-btn" id="pomoStart" onclick="togglePomo()">▶ Έναρξη</button>
+        <button class="pomo-btn" onclick="resetPomo()">↺ Επαναφορά</button>
+        <button class="pomo-btn" onclick="skipPomo()">⏭ Παράλειψη</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHART -->
+  <div class="chart-wrap">
+    <div class="chart-title"><i class="fa fa-chart-bar" style="color:#a855f7"></i> Εβδομαδιαία Παραγωγικότητα</div>
+    <div class="chart-bars" id="chartBars"></div>
+  </div>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <div class="search-wrap">
+      <i class="fa fa-search"></i>
+      <input class="search-input" id="searchInput" placeholder="Αναζήτηση εργασιών..." oninput="renderTasks()"/>
+    </div>
+    <select class="filter-select" id="filterCat" onchange="renderTasks()">
+      <option value="">Όλες οι κατηγορίες</option>
+      <option value="work">💼 Εργασία</option>
+      <option value="personal">👤 Προσωπικό</option>
+      <option value="fitness">🏃 Άσκηση</option>
+      <option value="shopping">🛒 Αγορές</option>
+      <option value="other">📌 Άλλο</option>
+    </select>
+    <select class="filter-select" id="filterPrio" onchange="renderTasks()">
+      <option value="">Όλες οι προτεραιότητες</option>
+      <option value="high">🔴 Υψηλή</option>
+      <option value="medium">🟡 Μέτρια</option>
+      <option value="low">🟢 Χαμηλή</option>
+    </select>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="setTab('all',this)">Όλες</button>
+    <button class="tab" onclick="setTab('pending',this)">Εκκρεμείς</button>
+    <button class="tab" onclick="setTab('done',this)">Ολοκλ/νες</button>
+    <button class="tab" onclick="setTab('today',this)">Σήμερα</button>
+  </div>
+
+  <!-- TASK LIST -->
+  <div class="section-header">
+    <div class="section-title">📝 Εργασίες</div>
+    <span class="task-count-badge" id="taskCountBadge">0</span>
+  </div>
+  <div class="task-list" id="taskList"></div>
+
+</div>
+
+<!-- FAB -->
+<button class="fab" onclick="openModal()" title="Νέα Εργασία (Ctrl+K)">
+  <i class="fa fa-plus"></i>
+</button>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modalBg" onclick="closeModalBg(event)">
+  <div class="modal" id="modalBox">
+    <span class="modal-drag"></span>
+    <h2 id="modalTitle">✨ Νέα Εργασία</h2>
+    <div class="form-row">
+      <label>Τίτλος Εργασίας *</label>
+      <input id="fTitle" placeholder="Τι πρέπει να γίνει;" maxlength="120"/>
+    </div>
+    <div class="form-row">
+      <label>Περιγραφή</label>
+      <textarea id="fDesc" placeholder="Προσθέσε περισσότερες λεπτομέρειες..."></textarea>
+    </div>
+    <div class="form-grid">
+      <div class="form-row">
+        <label>Κατηγορία</label>
+        <select id="fCat">
+          <option value="work">💼 Εργασία</option>
+          <option value="personal">👤 Προσωπικό</option>
+          <option value="fitness">🏃 Άσκηση</option>
+          <option value="shopping">🛒 Αγορές</option>
+          <option value="other">📌 Άλλο</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Προτεραιότητα</label>
+        <select id="fPrio">
+          <option value="medium">🟡 Μέτρια</option>
+          <option value="high">🔴 Υψηλή</option>
+          <option value="low">🟢 Χαμηλή</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <label>Ημερομηνία Λήξης</label>
+      <input type="date" id="fDate"/>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal()">Άκυρο</button>
+      <button class="btn-save" onclick="saveTask()"><i class="fa fa-check" style="margin-right:6px"></i>Αποθήκευση</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOASTS -->
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script>
+// ============================================================
+// STATE
+// ============================================================
+let tasks = JSON.parse(localStorage.getItem('tf_tasks_gr') || '[]');
+let editId = null;
+let currentTab = 'all';
+let dragSrcIdx = null;
+let isDark = localStorage.getItem('tf_theme_gr') !== 'light';
+let deferredInstall = null;
+
+// Pomodoro
+let pomoMode = 'focus';
+let pomoSeconds = 25 * 60;
+let pomoRunning = false;
+let pomoInterval = null;
+let pomoSessions = JSON.parse(localStorage.getItem('tf_pomo_gr') || '[false,false,false,false]');
+
+// Weekly chart
+function getWeekId() {
+  const d = new Date(), jan1 = new Date(d.getFullYear(),0,1);
+  return d.getFullYear()+'-W'+Math.ceil(((d-jan1)/86400000+jan1.getDay()+1)/7);
+}
+let weeklyData = JSON.parse(localStorage.getItem('tf_weekly_gr') || 'null');
+if (!weeklyData || weeklyData.week !== getWeekId()) {
+  weeklyData = { week: getWeekId(), days: [0,0,0,0,0,0,0] };
+  localStorage.setItem('tf_weekly_gr', JSON.stringify(weeklyData));
+}
+
+// ============================================================
+// INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  applyTheme();
+  setTodayDate();
+  renderAll();
+  renderChart();
+  renderPomoDots();
+  updatePomoUI();
+  document.getElementById('themeBtn').onclick = toggleTheme;
+});
+
+// PWA install prompt
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredInstall = e;
+  document.getElementById('installBanner').classList.add('visible');
+  document.getElementById('installBtn').classList.add('visible');
+});
+window.addEventListener('appinstalled', () => {
+  document.getElementById('installBanner').classList.remove('visible');
+  document.getElementById('installBtn').classList.remove('visible');
+  toast('✓ Η εφαρμογή εγκαταστάθηκε!', 'success');
+});
+
+function installApp() {
+  if (!deferredInstall) { toast('Άνοιξε από τον browser στο κινητό σου', ''); return; }
+  deferredInstall.prompt();
+  deferredInstall.userChoice.then(r => {
+    if (r.outcome === 'accepted') toast('✓ Εγκαταστάθηκε!', 'success');
+    deferredInstall = null;
+    document.getElementById('installBanner').classList.remove('visible');
+  });
+}
+
+function saveTasks() { localStorage.setItem('tf_tasks_gr', JSON.stringify(tasks)); }
+function saveWeekly() { localStorage.setItem('tf_weekly_gr', JSON.stringify(weeklyData)); }
+
+function applyTheme() {
+  document.body.classList.toggle('light', !isDark);
+  document.getElementById('themeBtn').innerHTML = isDark ? '<i class="fa fa-moon"></i>' : '<i class="fa fa-sun"></i>';
+}
+function toggleTheme() {
+  isDark = !isDark;
+  localStorage.setItem('tf_theme_gr', isDark ? 'dark' : 'light');
+  applyTheme();
+}
+
+const DAYS_GR = ['Κυρ','Δευ','Τρι','Τετ','Πεμ','Παρ','Σαβ'];
+const MONTHS_GR = ['Ιαν','Φεβ','Μαρ','Απρ','Μαΐ','Ιουν','Ιουλ','Αυγ','Σεπ','Οκτ','Νοε','Δεκ'];
+function setTodayDate() {
+  const d = new Date();
+  document.getElementById('todayDate').textContent = DAYS_GR[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS_GR[d.getMonth()];
+}
+
+// ============================================================
+// RENDER
+// ============================================================
+function renderAll() { updateStats(); renderTasks(); }
+
+function updateStats() {
+  const total = tasks.length;
+  const done = tasks.filter(t => t.done).length;
+  const pend = total - done;
+  const perc = total ? Math.round(done / total * 100) : 0;
+  document.getElementById('s-total').textContent = total;
+  document.getElementById('s-done').textContent = done;
+  document.getElementById('s-pend').textContent = pend;
+  document.getElementById('s-perc').textContent = perc + '%';
+  document.getElementById('prog-bar').style.width = perc + '%';
+  document.getElementById('prog-lbl').textContent = perc + '%';
+}
+
+function setTab(tab, btn) {
+  currentTab = tab;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderTasks();
+}
+
+function renderTasks() {
+  const search = (document.getElementById('searchInput').value || '').toLowerCase();
+  const cat = document.getElementById('filterCat').value;
+  const prio = document.getElementById('filterPrio').value;
+  const today = new Date().toISOString().split('T')[0];
+
+  let filtered = tasks.filter(t => {
+    if (search && !t.title.toLowerCase().includes(search) && !(t.desc||'').toLowerCase().includes(search)) return false;
+    if (cat && t.cat !== cat) return false;
+    if (prio && t.prio !== prio) return false;
+    if (currentTab === 'pending' && t.done) return false;
+    if (currentTab === 'done' && !t.done) return false;
+    if (currentTab === 'today' && t.date !== today) return false;
+    return true;
+  });
+
+  document.getElementById('taskCountBadge').textContent = filtered.length;
+  const list = document.getElementById('taskList');
+
+  if (filtered.length === 0) {
+    list.innerHTML = '<div class="empty"><div class="empty-icon">📭</div><h3>Δεν βρέθηκαν εργασίες</h3><p>Πρόσθεσε νέα εργασία ή άλλαξε τα φίλτρα</p></div>';
+    return;
+  }
+
+  const catIcons = { work:'💼', personal:'👤', fitness:'🏃', shopping:'🛒', other:'📌' };
+  const catLabels = { work:'Εργασία', personal:'Προσωπικό', fitness:'Άσκηση', shopping:'Αγορές', other:'Άλλο' };
+  const prioLabels = { high:'🔴 Υψηλή', medium:'🟡 Μέτρια', low:'🟢 Χαμηλή' };
+
+  list.innerHTML = filtered.map(t => {
+    const origIdx = tasks.indexOf(t);
+    const isOverdue = t.date && t.date < today && !t.done;
+    return `<div class="task-item ${t.done ? 'done-item' : ''}" draggable="true"
+        ondragstart="dragStart(event,${origIdx})"
+        ondragover="dragOver(event,${origIdx})"
+        ondrop="drop(event,${origIdx})"
+        ondragend="dragEnd(event)">
+      <div class="task-priority-bar ${t.prio}"></div>
+      <div class="task-check ${t.done ? 'checked' : ''}" onclick="toggleTask('${t.id}')"></div>
+      <div class="task-body">
+        <div class="task-title">${escHtml(t.title)}</div>
+        <div class="task-meta">
+          <span class="badge badge-cat-${t.cat}">${catIcons[t.cat]} ${catLabels[t.cat]||t.cat}</span>
+          <span class="badge badge-${t.prio}">${prioLabels[t.prio]||t.prio}</span>
+          ${t.date ? `<span class="badge ${isOverdue ? 'badge-overdue' : 'badge-date'}"><i class="fa fa-calendar" style="font-size:9px"></i> ${isOverdue ? '⚠ ' : ''}${t.date}</span>` : ''}
+        </div>
+        ${t.desc ? `<div class="task-desc">${escHtml(t.desc)}</div>` : ''}
+      </div>
+      <div class="task-actions">
+        <button class="task-btn edit" onclick="editTask('${t.id}')" title="Επεξεργασία"><i class="fa fa-pen"></i></button>
+        <button class="task-btn del" onclick="deleteTask('${t.id}')" title="Διαγραφή"><i class="fa fa-trash"></i></button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ============================================================
+// TASK CRUD
+// ============================================================
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2); }
+
+function openModal(id = null) {
+  editId = id;
+  const t = id ? tasks.find(x => x.id === id) : null;
+  document.getElementById('modalTitle').textContent = id ? '✏️ Επεξεργασία Εργασίας' : '✨ Νέα Εργασία';
+  document.getElementById('fTitle').value = t ? t.title : '';
+  document.getElementById('fDesc').value = t ? (t.desc || '') : '';
+  document.getElementById('fCat').value = t ? t.cat : 'work';
+  document.getElementById('fPrio').value = t ? t.prio : 'medium';
+  document.getElementById('fDate').value = t ? (t.date || '') : '';
+  document.getElementById('modalBg').classList.add('show');
+  setTimeout(() => document.getElementById('fTitle').focus(), 150);
+}
+function closeModal() { document.getElementById('modalBg').classList.remove('show'); editId = null; }
+function closeModalBg(e) { if (e.target === document.getElementById('modalBg')) closeModal(); }
+
+function saveTask() {
+  const title = document.getElementById('fTitle').value.trim();
+  if (!title) { toast('Εισήγαγε τίτλο εργασίας', 'error'); return; }
+  if (editId) {
+    const t = tasks.find(x => x.id === editId);
+    Object.assign(t, { title, desc: document.getElementById('fDesc').value.trim(), cat: document.getElementById('fCat').value, prio: document.getElementById('fPrio').value, date: document.getElementById('fDate').value });
+    toast('Η εργασία ενημερώθηκε ✓', 'success');
+  } else {
+    tasks.unshift({ id: uid(), title, desc: document.getElementById('fDesc').value.trim(), cat: document.getElementById('fCat').value, prio: document.getElementById('fPrio').value, date: document.getElementById('fDate').value, done: false, createdAt: new Date().toISOString() });
+    toast('Η εργασία προστέθηκε ✓', 'success');
+  }
+  saveTasks(); closeModal(); renderAll();
+}
+
+function toggleTask(id) {
+  const t = tasks.find(x => x.id === id);
+  t.done = !t.done;
+  if (t.done) {
+    const day = new Date().getDay();
+    weeklyData.days[day]++;
+    saveWeekly(); renderChart();
+    if (tasks.length > 0 && tasks.every(x => x.done)) confetti();
+    else toast('✓ Μπράβο! Συνέχισε!', 'success');
+  }
+  saveTasks(); renderAll();
+}
+function editTask(id) { openModal(id); }
+function deleteTask(id) {
+  if (!confirm('Διαγραφή αυτής της εργασίας;')) return;
+  tasks = tasks.filter(x => x.id !== id);
+  saveTasks(); renderAll(); toast('Η εργασία διαγράφηκε', 'error');
+}
+
+// ============================================================
+// DRAG & DROP
+// ============================================================
+function dragStart(e,idx) { dragSrcIdx=idx; e.currentTarget.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; }
+function dragOver(e,idx) { e.preventDefault(); document.querySelectorAll('.task-item').forEach(el=>el.classList.remove('drag-over')); e.currentTarget.classList.add('drag-over'); }
+function drop(e,idx) { e.preventDefault(); if(dragSrcIdx===null||dragSrcIdx===idx) return; const m=tasks.splice(dragSrcIdx,1)[0]; tasks.splice(idx,0,m); saveTasks(); renderAll(); }
+function dragEnd() { document.querySelectorAll('.task-item').forEach(el=>{el.classList.remove('dragging');el.classList.remove('drag-over');}); dragSrcIdx=null; }
+
+// ============================================================
+// POMODORO
+// ============================================================
+const POMO_FOCUS=25*60, POMO_BREAK=5*60;
+function renderPomoDots() {
+  document.getElementById('pomoDots').innerHTML = pomoSessions.map(d => '<div class="pomo-dot '+(d?'done':'')+'"></div>').join('');
+}
+function updatePomoUI() {
+  const m = Math.floor(pomoSeconds/60).toString().padStart(2,'0');
+  const s = (pomoSeconds%60).toString().padStart(2,'0');
+  document.getElementById('pomoTime').textContent = m+':'+s;
+  document.getElementById('pomoLabel').textContent = pomoMode==='focus' ? '🍅 Χρόνος Εστίασης' : '☕ Διάλειμμα';
+  const total = pomoMode==='focus' ? POMO_FOCUS : POMO_BREAK;
+  const circ = 2*Math.PI*35;
+  const offset = circ*(pomoSeconds/total);
+  document.getElementById('pomoCircle').style.strokeDashoffset = circ-offset;
+}
+function togglePomo() {
+  pomoRunning = !pomoRunning;
+  const btn = document.getElementById('pomoStart');
+  btn.textContent = pomoRunning ? '⏸ Παύση' : '▶ Συνέχεια';
+  btn.classList.toggle('active', pomoRunning);
+  if (pomoRunning) {
+    pomoInterval = setInterval(() => {
+      if (pomoSeconds <= 0) {
+        clearInterval(pomoInterval); pomoRunning=false;
+        if (pomoMode==='focus') {
+          toast('🍅 Τέλος εστίασης! Κάνε διάλειμμα.','success');
+          const idx=pomoSessions.indexOf(false);
+          if (idx>=0) { pomoSessions[idx]=true; localStorage.setItem('tf_pomo_gr',JSON.stringify(pomoSessions)); }
+          pomoMode='break'; pomoSeconds=POMO_BREAK;
+        } else {
+          toast('☕ Τέλος διαλείμματος! Πίσω στη δουλειά.','success');
+          pomoMode='focus'; pomoSeconds=POMO_FOCUS;
+        }
+        renderPomoDots(); updatePomoUI();
+        document.getElementById('pomoStart').textContent='▶ Έναρξη';
+        document.getElementById('pomoStart').classList.remove('active');
+        return;
+      }
+      pomoSeconds--; updatePomoUI();
+    },1000);
+  } else { clearInterval(pomoInterval); }
+}
+function resetPomo() {
+  clearInterval(pomoInterval); pomoRunning=false; pomoMode='focus'; pomoSeconds=POMO_FOCUS;
+  document.getElementById('pomoStart').textContent='▶ Έναρξη';
+  document.getElementById('pomoStart').classList.remove('active');
+  updatePomoUI();
+}
+function skipPomo() {
+  clearInterval(pomoInterval); pomoRunning=false;
+  pomoMode = pomoMode==='focus' ? 'break' : 'focus';
+  pomoSeconds = pomoMode==='focus' ? POMO_FOCUS : POMO_BREAK;
+  document.getElementById('pomoStart').textContent='▶ Έναρξη';
+  document.getElementById('pomoStart').classList.remove('active');
+  updatePomoUI();
+}
+
+// ============================================================
+// CHART
+// ============================================================
+function renderChart() {
+  const days = ['Κυρ','Δευ','Τρι','Τετ','Πεμ','Παρ','Σαβ'];
+  const today = new Date().getDay();
+  const maxV = Math.max(...weeklyData.days, 1);
+  document.getElementById('chartBars').innerHTML = weeklyData.days.map((v,i) => {
+    const h = Math.round((v/maxV)*82)+4;
+    const isToday = i===today;
+    return `<div class="chart-col">
+      <div class="chart-val">${v||''}</div>
+      <div class="chart-bar" style="height:${h}px;${isToday?'background:linear-gradient(180deg,#ec4899,#f43f5e);box-shadow:0 0 12px rgba(236,72,153,0.5)':''}"></div>
+      <div class="chart-day" style="${isToday?'color:#e879f9;font-size:11px':''}">${days[i]}</div>
+    </div>`;
+  }).join('');
+}
+
+// ============================================================
+// EXPORT CSV
+// ============================================================
+function exportCSV() {
+  if (!tasks.length) { toast('Δεν υπάρχουν εργασίες για εξαγωγή','error'); return; }
+  const catLabels = {work:'Εργασία',personal:'Προσωπικό',fitness:'Άσκηση',shopping:'Αγορές',other:'Άλλο'};
+  const prioLabels = {high:'Υψηλή',medium:'Μέτρια',low:'Χαμηλή'};
+  const header = 'Τίτλος,Κατηγορία,Προτεραιότητα,Ημερομηνία,Κατάσταση,Περιγραφή';
+  const rows = tasks.map(t => ['"'+(t.title||'').replace(/"/g,'""')+'"', catLabels[t.cat]||t.cat, prioLabels[t.prio]||t.prio, t.date||'', t.done?'Ολοκληρώθηκε':'Εκκρεμεί', '"'+(t.desc||'').replace(/"/g,'""')+'"'].join(','));
+  const csv = '﻿' + [header,...rows].join('\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
+  a.download = 'taskflow-export.csv';
+  a.click();
+  toast('✓ Εξαγωγή CSV ολοκληρώθηκε','success');
+}
+
+// ============================================================
+// CONFETTI
+// ============================================================
+function confetti() {
+  const colors = ['#a855f7','#ec4899','#38bdf8','#06d6a0','#ffb703','#ff4d6d','#e879f9','#fbbf24'];
+  for (let i=0;i<100;i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    el.style.cssText = 'left:'+Math.random()*100+'vw;background:'+colors[Math.floor(Math.random()*colors.length)]+';animation-duration:'+(1.5+Math.random()*2.5)+'s;animation-delay:'+Math.random()*0.6+'s;width:'+(6+Math.random()*8)+'px;height:'+(6+Math.random()*8)+'px;border-radius:'+(Math.random()>0.5?'50%':'3px')+'';
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),5000);
+  }
+  toast('🎉 Απίθανο! Όλες οι εργασίες ολοκληρώθηκαν!','success');
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+function toast(msg, type='') {
+  const w = document.getElementById('toastWrap');
+  const t = document.createElement('div');
+  t.className = 'toast '+type;
+  t.textContent = msg;
+  w.appendChild(t);
+  setTimeout(()=>{ t.style.opacity='0'; t.style.transform='translateY(-8px)'; setTimeout(()=>t.remove(),300); },2800);
+}
+
+// ============================================================
+// KEYBOARD
+// ============================================================
+document.addEventListener('keydown', e => {
+  if (e.key==='Escape') closeModal();
+  if ((e.metaKey||e.ctrlKey) && e.key==='k') { e.preventDefault(); openModal(); }
+  if ((e.metaKey||e.ctrlKey) && e.key==='Enter' && document.getElementById('modalBg').classList.contains('show')) saveTask();
+});
+
+function escHtml(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// Service Worker για PWA
+const swCode = `
+self.addEventListener('install', e => self.skipWaiting());
+self.addEventListener('activate', e => clients.claim());
+self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => new Response('', {status:200}))));
+`;
+if ('serviceWorker' in navigator) {
+  const swBlob = new Blob([swCode], {type:'application/javascript'});
+  const swUrl = URL.createObjectURL(swBlob);
+  navigator.serviceWorker.register(swUrl).catch(()=>{});
+}
+</script>
+</body>
+</html>
