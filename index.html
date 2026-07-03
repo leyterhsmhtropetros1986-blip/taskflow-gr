@@ -897,16 +897,21 @@ document.getElementById("sessions").innerText =
 
 updateTimer();
 </script>
-</body>
-</html>
+...
+updateTimer();
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
 <script>
 function celebrate(){
-  confetti({
-    particleCount:200,
-    spread:120,
-    origin:{y:0.6}
-  });
+ confetti({
+   particleCount:200,
+   spread:120,
+   origin:{y:0.6}
+ });
 }
 </script>
+
+</body>
+</html>
